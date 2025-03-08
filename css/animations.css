@@ -1,0 +1,186 @@
+/* Animation Keyframes */
+
+/* Idle Animation */
+@keyframes idle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Bounce Animation for interactions */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Happy Animation */
+@keyframes happy {
+    0%, 100% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(-5deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
+}
+
+/* Eating Animation */
+@keyframes eat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Sleeping Animation */
+@keyframes sleep {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+}
+
+/* Cleaning Animation */
+@keyframes clean {
+    0%, 100% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(10deg);
+    }
+    75% {
+        transform: rotate(-10deg);
+    }
+}
+
+/* Sad Animation */
+@keyframes sad {
+    0%, 100% {
+        transform: translateY(0) rotate(0);
+    }
+    25% {
+        transform: translateY(3px) rotate(-2deg);
+    }
+    75% {
+        transform: translateY(3px) rotate(2deg);
+    }
+}
+
+/* Notification Glow for buttons when needs are low */
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
+    }
+}
+
+/* Button Feedback Animation */
+@keyframes buttonPress {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Need Bar Low Warning Animation */
+@keyframes barWarning {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Apply animations to elements */
+.animated-idle {
+    animation: idle 2s ease-in-out infinite;
+}
+
+.animated-bounce {
+    animation: bounce 1s ease-in-out;
+}
+
+.animated-happy {
+    animation: happy 1s ease-in-out infinite;
+}
+
+.animated-eat {
+    animation: eat 0.5s ease-in-out;
+}
+
+.animated-sleep {
+    animation: sleep 3s ease-in-out infinite;
+}
+
+.animated-clean {
+    animation: clean 0.8s ease-in-out;
+}
+
+.animated-sad {
+    animation: sad 2s ease-in-out infinite;
+}
+
+.need-warning {
+    animation: barWarning 1s ease-in-out infinite;
+}
+
+.button-notification {
+    animation: glowPulse 1.5s infinite;
+}
+
+.button-pressed {
+    animation: buttonPress 0.3s ease-out;
+}
+
+/* Transitions */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    opacity: 1;
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

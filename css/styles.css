@@ -1,0 +1,279 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #111;
+    color: #fff;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    touch-action: manipulation; /* Prevents zoom on double-tap on mobile */
+}
+
+/* Game Container */
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 500px; /* Limit width on larger screens */
+    max-height: 800px; /* Limit height on larger screens */
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* Game Background */
+.game-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+    z-index: 1;
+}
+
+/* Canvas for Mimikyu */
+.game-canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 50%;
+    z-index: 2;
+}
+
+/* Needs Container */
+.needs-container {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    z-index: 3;
+}
+
+.need-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 22%;
+}
+
+.need-icon {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 4px;
+}
+
+.hunger-icon {
+    /* Using emoji as icon */
+    position: relative;
+    background-color: #ff6b6b;
+    border-radius: 50%;
+}
+
+.hunger-icon::after {
+    content: "🍎";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+}
+
+.happiness-icon {
+    /* Using emoji as icon */
+    position: relative;
+    background-color: #ffca3a;
+    border-radius: 50%;
+}
+
+.happiness-icon::after {
+    content: "😊";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+}
+
+.cleanliness-icon {
+    /* Using emoji as icon */
+    position: relative;
+    background-color: #4ecdc4;
+    border-radius: 50%;
+}
+
+.cleanliness-icon::after {
+    content: "🧼";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+}
+
+.energy-icon {
+    /* Using emoji as icon */
+    position: relative;
+    background-color: #8ac926;
+    border-radius: 50%;
+}
+
+.energy-icon::after {
+    content: "⚡";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+}
+
+.need-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.need-bar {
+    height: 100%;
+    width: 80%; /* Default value, will be controlled by JS */
+    background-color: #fff;
+    transition: width 0.3s ease-out;
+}
+
+#hunger-bar {
+    background-color: #ff6b6b;
+}
+
+#happiness-bar {
+    background-color: #ffca3a;
+}
+
+#cleanliness-bar {
+    background-color: #4ecdc4;
+}
+
+#energy-bar {
+    background-color: #8ac926;
+}
+
+/* Action Buttons */
+.action-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10px;
+    z-index: 3;
+}
+
+.action-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    font-size: 12px;
+    padding: 5px;
+    outline: none;
+}
+
+.action-button:active {
+    transform: scale(0.95);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.button-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+/* Sound Toggle */
+.sound-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    transition: background-color 0.2s;
+}
+
+.sound-toggle:active {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Media Queries for larger screens */
+@media (min-width: 768px) {
+    .game-container {
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .action-button {
+        width: 80px;
+        height: 80px;
+        font-size: 14px;
+    }
+
+    .button-icon {
+        font-size: 28px;
+    }
+
+    .need-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .need-bar-container {
+        height: 12px;
+    }
+}
+
+/* Set day/night backgrounds */
+.day-background {
+    background-image: url('../assets/backgrounds/new background day.png');
+}
+
+.night-background {
+    background-image: url('../assets/backgrounds/new background night.png');
+}

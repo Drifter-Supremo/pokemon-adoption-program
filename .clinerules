@@ -1,0 +1,68 @@
+# Pokémon Adoption Program - Project Rules & Guidelines
+
+## File Organization
+- All game assets are stored in the `/assets` directory
+- Source code files will be organized in a modular structure (separate JS files for each system)
+- Memory bank files maintained in `memory-bank` directory
+
+## Asset Naming Conventions
+- Sprite files follow the pattern `mimikyu_[state].png`
+- Audio files use appropriate extensions based on format (.mp3, .wav, .ogg)
+- Background files use the naming pattern `background_[time].png`
+
+## Code Style Guidelines
+- Use ES6+ JavaScript features
+- Maintain clear separation between game systems
+- Follow modular programming approach
+- Use descriptive variable and function names
+- Add comments for complex logic sections
+
+## Game State Management
+- Central game state object as source of truth
+- Observer pattern for state changes
+- LocalStorage for persistence
+- Timestamp-based decay system
+
+## UI Elements
+- Mobile-first responsive design
+- Touch-friendly controls
+- Clear visual feedback for all interactions
+- Accessible color choices and control options
+
+## Implementation Priorities
+1. Core functionality before advanced features
+2. Mobile compatibility is essential
+3. Game performance should be smooth on all devices
+4. Emotional engagement through proper feedback
+
+## Development Workflow
+- Implement features in the order specified in `progress.md`
+- Test each feature before moving to the next
+- Update memory bank files when implementing significant changes
+- Start with basic structure before adding complex interactions
+
+## Audio Guidelines
+- Sound effects should be short and responsive
+- Background music should be subtle and loop seamlessly
+- All audio elements must have mute capability
+- Preload audio assets to prevent playback delays
+
+## Sprite Management
+- Use sprite swapping rather than complex animations
+- Ensure smooth transitions between states
+- Each sprite should clearly communicate Mimikyu's state
+- Consider reduced motion settings for accessibility
+
+## Naming Conventions
+- camelCase for JavaScript variables and functions
+- Descriptive IDs for HTML elements
+- Semantic class names for CSS styling
+- Consistent prefixing for related elements
+
+## Code Organization Patterns
+- Core gameState module handles state management
+- UI controller handles DOM interactions
+- Animation system manages visual representation
+- Sound system handles all audio playback
+- Needs system tracks and updates Mimikyu's stats
+- Save system handles persistence

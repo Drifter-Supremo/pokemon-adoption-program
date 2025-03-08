@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pokémon Adoption Program - Mimikyu</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/pokedex.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Game Background -->
+        <div id="background" class="game-background"></div>
+        
+        <!-- Main Game Canvas for Mimikyu -->
+        <canvas id="game-canvas" class="game-canvas"></canvas>
+        
+        <!-- Needs Indicators -->
+        <div class="needs-container">
+            <div class="need-indicator">
+                <div class="need-icon hunger-icon"></div>
+                <div class="need-bar-container">
+                    <div id="hunger-bar" class="need-bar"></div>
+                </div>
+            </div>
+            <div class="need-indicator">
+                <div class="need-icon happiness-icon"></div>
+                <div class="need-bar-container">
+                    <div id="happiness-bar" class="need-bar"></div>
+                </div>
+            </div>
+            <div class="need-indicator">
+                <div class="need-icon cleanliness-icon"></div>
+                <div class="need-bar-container">
+                    <div id="cleanliness-bar" class="need-bar"></div>
+                </div>
+            </div>
+            <div class="need-indicator">
+                <div class="need-icon energy-icon"></div>
+                <div class="need-bar-container">
+                    <div id="energy-bar" class="need-bar"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button id="feed-btn" class="action-button">
+                <span class="button-icon">🍎</span>
+                <span class="button-text">Feed</span>
+            </button>
+            <button id="play-btn" class="action-button">
+                <span class="button-icon">🎮</span>
+                <span class="button-text">Play</span>
+            </button>
+            <button id="clean-btn" class="action-button">
+                <span class="button-icon">🧼</span>
+                <span class="button-text">Clean</span>
+            </button>
+            <button id="sleep-btn" class="action-button">
+                <span class="button-icon">💤</span>
+                <span class="button-text">Sleep</span>
+            </button>
+        </div>
+        
+        <!-- Sound Control -->
+        <button id="sound-toggle" class="sound-toggle">🔊</button>
+        
+        <!-- Pokédex Button -->
+        <button id="pokedex-btn" class="pokedex-button">
+            <img src="assets/icons/pokedex icon.png" alt="Pokédex">
+        </button>
+    </div>
+    
+    <!-- Pokédex Modal -->
+    <div id="pokedex-modal" class="pokedex-modal">
+        <div class="pokedex-content">
+            <button id="pokedex-close" class="pokedex-close">&times;</button>
+            
+            <div class="pokedex-header">
+                <h1 class="pokedex-title">Pokédex Data</h1>
+            </div>
+            
+            <!-- Basic Information Section -->
+            <div class="pokedex-section">
+                <table class="pokedex-table">
+                    <tr>
+                        <th>National №</th>
+                        <td>0778</td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>
+                            <span class="type-pill type-ghost">GHOST</span>
+                            <span class="type-pill type-fairy">FAIRY</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Species</th>
+                        <td>Disguise Pokémon</td>
+                    </tr>
+                    <tr>
+                        <th>Height</th>
+                        <td>0.2 m (0'08")</td>
+                    </tr>
+                    <tr>
+                        <th>Weight</th>
+                        <td>0.7 kg (1.5 lbs)</td>
+                    </tr>
+                    <tr>
+                        <th>Abilities</th>
+                        <td>1. Disguise</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Base Stats Section -->
+            <div class="pokedex-section">
+                <h2 class="pokedex-section-title">Base stats</h2>
+                <table class="pokedex-table stat-table">
+                    <tr>
+                        <th>HP</th>
+                        <td>55</td>
+                        <td style="width: 100%;">
+                            <div class="stat-bar-container">
+                                <div id="hp-bar" class="stat-bar"></div>
+                            </div>
+                            <div class="stat-values">
+                                <span>220</span>
+                                <span>314</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Attack</th>
+                        <td>90</td>
+                        <td>
+                            <div class="stat-bar-container">
+                                <div id="attack-bar" class="stat-bar"></div>
+                            </div>
+                            <div class="stat-values">
+                                <span>166</span>
+                                <span>306</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Defense</th>
+                        <td>80</td>
+                        <td>
+                            <div class="stat-bar-container">
+                                <div id="defense-bar" class="stat-bar"></div>
+                            </div>
+                            <div class="stat-values">
+                                <span>148</span>
+                                <span>284</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Sp. Atk</th>
+                        <td>50</td>
+                        <td>
+                            <div class="stat-bar-container">
+                                <div id="spAtk-bar" class="stat-bar"></div>
+                            </div>
+                            <div class="stat-values">
+                                <span>94</span>
+                                <span>218</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Sp. Def</th>
+                        <td>105</td>
+                        <td>
+                            <div class="stat-bar-container">
+                                <div id="spDef-bar" class="stat-bar"></div>
+                            </div>
+                            <div class="stat-values">
+                                <span>193</span>
+                                <span>339</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Speed</th>
+                        <td>96</td>
+                        <td>
+                            <div class="stat-bar-container">
+                                <div id="speed-bar" class="stat-bar"></div>
+                            </div>
+                            <div class="stat-values">
+                                <span>177</span>
+                                <span>320</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td>476</td>
+                        <td style="text-align: right;">
+                            <span style="margin-right: 20px;">Min</span>
+                            <span>Max</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Training Section -->
+            <div class="pokedex-section">
+                <h2 class="pokedex-section-title">Training</h2>
+                <table class="pokedex-table">
+                    <tr>
+                        <th>EV yield</th>
+                        <td>2 Sp. Def</td>
+                    </tr>
+                    <tr>
+                        <th>Catch rate</th>
+                        <td>45 (5.9% with PokéBall, full HP)</td>
+                    </tr>
+                    <tr>
+                        <th>Base Friendship</th>
+                        <td>50 (normal)</td>
+                    </tr>
+                    <tr>
+                        <th>Base Exp.</th>
+                        <td>167</td>
+                    </tr>
+                    <tr>
+                        <th>Growth Rate</th>
+                        <td>Medium Fast</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Breeding Section -->
+            <div class="pokedex-section">
+                <h2 class="pokedex-section-title">Breeding</h2>
+                <table class="pokedex-table">
+                    <tr>
+                        <th>Egg Groups</th>
+                        <td>Amorphous</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td><span style="color: #1E90FF;">50% male</span>, <span style="color: #FF69B4;">50% female</span></td>
+                    </tr>
+                    <tr>
+                        <th>Egg cycles</th>
+                        <td>20 (4,884–5,140 steps)</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Evolution Chart -->
+            <div class="pokedex-section">
+                <h2 class="pokedex-section-title">Evolution chart</h2>
+                <div class="evolution-chart">
+                    • Mimikyu does not evolve.
+                </div>
+            </div>
+            
+            <!-- Description -->
+            <div class="pokedex-section">
+                <div class="pokedex-description">
+                    This Pokémon lives in dark places untouched by sunlight. When it appears before humans, it hides itself under a cloth that resembles a Pikachu.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Simple Debug Controls -->
+    <div style="position: fixed; bottom: 10px; left: 10px; background-color: rgba(0,0,0,0.7); padding: 10px; color: white; font-size: 12px; border-radius: 5px;">
+        <div style="margin-bottom: 5px;">Debug Controls:</div>
+        <button onclick="gameState.debugForceHungry()">Test Hungry Animation</button>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="js/constants.js"></script>
+    <script src="js/debugHelpers.js"></script>
+    <script src="js/spriteAnimator.js"></script>
+    <script src="js/gameState.js"></script>
+    <script src="js/uiController.js"></script>
+    <script src="js/soundSystem.js"></script>
+    <script src="js/saveSystem.js"></script>
+    <script src="js/pokedexSystem.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
