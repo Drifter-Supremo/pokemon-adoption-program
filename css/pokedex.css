@@ -1,23 +1,6 @@
 /* Pokédex Styles */
 
-/* Pokédex Button */
-.pokedex-button {
-    position: absolute;
-    top: 90px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: none;
-    transition: background-color 0.2s;
-}
+/* Pokédex Button styles are now in styles.css to align with gameboy layout */
 
 .pokedex-button:active {
     background-color: rgba(0, 0, 0, 0.7);
@@ -56,6 +39,9 @@
     max-width: 500px;
     max-height: 80vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Enable momentum-based scrolling on iOS */
+    overscroll-behavior: contain; /* Prevent scroll chaining */
+    touch-action: pan-y; /* Allow vertical touch scrolling */
 }
 
 /* Pokédex Close Button */
@@ -209,5 +195,18 @@
     
     .pokedex-section-title {
         font-size: 20px;
+    }
+    
+    .pokedex-content {
+        margin: 10px auto;
+        padding: 15px;
+        max-height: 85vh; /* Slightly larger on mobile */
+    }
+    
+    .pokedex-close {
+        font-size: 28px; /* Larger touch target */
+        top: 5px;
+        right: 10px;
+        padding: 5px;
     }
 }

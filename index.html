@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="css/pokedex.css">
 </head>
 <body>
-    <div class="game-container">
+    <div class="gameboy-container">
+        <div class="gameboy-border">
+            <div class="game-container">
         <!-- Game Background -->
         <div id="background" class="game-background"></div>
         
         <!-- Main Game Canvas for Mimikyu -->
-        <canvas id="game-canvas" class="game-canvas"></canvas>
+        <canvas id="game-canvas" class="game-canvas" style="top: 55%; transform: translate(-50%, -40%);"></canvas>
         
         <!-- Needs Indicators -->
         <div class="needs-container">
@@ -71,6 +73,8 @@
         <button id="pokedex-btn" class="pokedex-button">
             <img src="assets/icons/pokedex icon.png" alt="Pokédex">
         </button>
+            </div>
+        </div>
     </div>
     
     <!-- Pokédex Modal -->
@@ -272,8 +276,8 @@
     </div>
     
     <!-- Simple Debug Controls -->
-    <div style="position: fixed; bottom: 10px; left: 10px; background-color: rgba(0,0,0,0.7); padding: 10px; color: white; font-size: 12px; border-radius: 5px;">
-        <div style="margin-bottom: 5px;">Debug Controls:</div>
+    <div class="debug-panel">
+        <div class="debug-title">Debug Controls:</div>
         <button onclick="gameState.debugForceHungry()">Test Hungry Animation</button>
     </div>
     
@@ -286,6 +290,73 @@
     <script src="js/soundSystem.js"></script>
     <script src="js/saveSystem.js"></script>
     <script src="js/pokedexSystem.js"></script>
+    <script>
+        // Responsive scaling for Game Boy border
+        function updateScale() {
+            const container = document.querySelector('.gameboy-container');
+            const border = document.querySelector('.gameboy-border');
+            const gameContainer = document.querySelector('.game-container');
+            
+            // Calculate the scale factor
+            const scaleX = (window.innerWidth * 0.95) / 1500;
+            const scaleY = (window.innerHeight * 0.95) / 1200;
+            const scale = Math.min(scaleX, scaleY);
+            
+            // Center the border in the container
+            container.style.display = 'flex';
+            container.style.justifyContent = 'center';
+            container.style.alignItems = 'center';
+            
+            // Apply transform with top-left origin
+            border.style.transformOrigin = 'top left';
+            border.style.transform = `scale(${scale})`;
+            
+            // Adjust position for centering (simpler than translate)
+            const scaledWidth = 1500 * scale;
+            const scaledHeight = 1200 * scale;
+            
+            const leftOffset = (window.innerWidth - scaledWidth) / 2;
+            const topOffset = (window.innerHeight - scaledHeight) / 2;
+            
+            border.style.position = 'absolute';
+            border.style.top = `${topOffset}px`;
+            border.style.left = `${leftOffset}px`;
+            
+            // Apply initial positioning to establish layout
+            applyGameContainerPosition();
+            
+            // Then after a slight delay, apply it again to ensure it takes effect
+            // This helps overcome any other script or style that might be affecting positioning
+            setTimeout(() => {
+                applyGameContainerPosition();
+            }, 50);
+        }
+        
+        // Separate function to consistently apply the game container position
+        function applyGameContainerPosition() {
+            const gameContainer = document.querySelector('.game-container');
+            
+            // Set a more aggressive position with !important-like approach
+            const targetTop = 255; // Original was 225px in CSS, added 30px offset - more noticeable
+            
+            // Apply directly to the element's style
+            gameContainer.style.position = 'absolute';
+            gameContainer.style.top = `${targetTop}px`;
+            gameContainer.style.left = '300px';
+            gameContainer.style.width = '900px';
+            gameContainer.style.height = '675px';
+            
+            // Force a reflow to ensure the browser applies these changes
+            gameContainer.offsetHeight;
+            
+            // Log for debugging
+            console.log('Applied game container position:', targetTop);
+        }
+        
+        // Initial scale and resize listener
+        window.addEventListener('load', updateScale);
+        window.addEventListener('resize', updateScale);
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>

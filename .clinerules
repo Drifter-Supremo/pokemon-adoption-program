@@ -66,3 +66,14 @@
 - Sound system handles all audio playback
 - Needs system tracks and updates Mimikyu's stats
 - Save system handles persistence
+
+## Game Boy Interface Guidelines
+- Border uses fixed dimensions (1500×1200px) with absolute positioning
+- Game screen uses fixed dimensions (900×675px) sized to fit the cutout area
+- Transform-origin set to 'top left' for predictable scaling behavior
+- Use JavaScript-based scaling that dynamically adjusts to window size
+- Apply absolute positioning for UI elements relative to the border
+- Position game controls outside the game screen
+  - Action buttons in the green area below the screen
+  - Pokédex and Sound buttons in the right side area
+- Maintain consistent element positions during window resizing
