@@ -67,6 +67,18 @@ The current focus is on **refining the Game Boy interface experience** and explo
 
 ## **🔄 Recent Changes**
 
+- **Debug Functionality Enhancements**:
+  - Added debug functions for testing additional features:
+    - `debugForceSad()`: Forces Mimikyu into the sad state animation for 30 seconds (extended from 10s)
+    - `debugForceNight()`: Instantly switches to the night background temporarily
+    - `debugToggleNightMode()`: Toggles between night and day modes persistently
+  - Fixed sad animation frame mapping to properly display all frames of the animation
+  - Improved debug panel layout:
+    - Relocated to right side of the screen
+    - Stacked buttons vertically for better organization
+    - Added clear labels indicating temporary vs. persistent effects
+  - Kept existing hungry animation test while adding the new functionality
+
 - **Game Boy Interface Improvements**:
   - Fixed button positioning issues with precise coordinate placement:
     - Action buttons (Feed, Play, Clean, Sleep): top: 750px, left: 9px

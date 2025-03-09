@@ -423,6 +423,102 @@ class GameState {
         this.updateMood();
         this.notifyObservers();
     }
+    
+    /**
+     * DEBUG FUNCTION: Force night background temporarily
+     */
+    debugForceNight() {
+        console.log("DEBUG: Forcing night background temporarily");
+        const background = document.getElementById('background');
+        if (background) {
+            background.classList.remove('day-background');
+            background.classList.add('night-background');
+        }
+    }
+    
+    /**
+     * DEBUG FUNCTION: Toggle between permanent night and day modes
+     */
+    debugToggleNightMode() {
+        // Initialize flag if not set
+        this._debugNightModeEnabled = !this._debugNightModeEnabled;
+        
+        console.log(`DEBUG: ${this._debugNightModeEnabled ? 'Enabled' : 'Disabled'} permanent night mode`);
+        
+        // Store the original update method if needed
+        if (!this._originalUpdateDayNightCycle && this._debugNightModeEnabled) {
+            this._originalUpdateDayNightCycle = this.updateDayNightCycle;
+            
+            // Replace with our override
+            this.updateDayNightCycle = () => {
+                // When in debug night mode, always show night
+                if (this._debugNightModeEnabled) {
+                    const background = document.getElementById('background');
+                    if (background) {
+                        background.classList.remove('day-background');
+                        background.classList.add('night-background');
+                    }
+                } else {
+                    // Otherwise use normal behavior
+                    this._originalUpdateDayNightCycle.call(this);
+                }
+            };
+        } else if (!this._debugNightModeEnabled && this._originalUpdateDayNightCycle) {
+            // Restore original method
+            this.updateDayNightCycle = this._originalUpdateDayNightCycle;
+            this._originalUpdateDayNightCycle = null;
+        }
+        
+        // Apply immediately
+        this.updateDayNightCycle();
+    }
+    
+    /**
+     * DEBUG FUNCTION: Force Mimikyu into sad state
+     */
+    debugForceSad() {
+        console.log("DEBUG: Forcing Mimikyu into sad state");
+        this.needs.happiness = NEED_CRITICAL_THRESHOLD - 1;
+        
+        // Override the default behavior to show sad animation
+        // We'll temporarily set a flag to force the sad animation
+        this._debugShowingSad = true;
+        
+        // Store the original updateMood method
+        if (!this._originalUpdateMood) {
+            this._originalUpdateMood = this.updateMood;
+        }
+        
+        // Override updateMood temporarily
+        this.updateMood = () => {
+            if (this._debugShowingSad) {
+                this.mood = STATE_SAD;
+                return;
+            }
+            
+            // Call original method if not showing sad
+            this._originalUpdateMood.call(this);
+        };
+        
+        // Reset after 30 seconds (extended from 10 seconds for better testing)
+        setTimeout(() => {
+            this._debugShowingSad = false;
+            
+            // Restore original method if needed
+            if (this._originalUpdateMood) {
+                this.updateMood = this._originalUpdateMood;
+                this._originalUpdateMood = null;
+            }
+            
+            // Update the mood
+            this.updateMood();
+            this.notifyObservers();
+        }, 30000); // 30 seconds
+        
+        // Update UI and notify observers
+        this.updateMood();
+        this.notifyObservers();
+    }
 }
 
 // Create a global instance of the game state

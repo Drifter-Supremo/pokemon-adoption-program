@@ -424,6 +424,11 @@ class SpriteAnimator {
             const framesPerDuration = Math.floor(animData.frames / durations.length);
             return (frameIndex % durations.length) * framesPerDuration;
         }
+        else if (animation === STATE_SAD) {
+            // For sad: 2 frames in XML, 16 frames in sprite sheet = 8x multiplier
+            const framesPerDuration = Math.floor(animData.frames / durations.length);
+            return (frameIndex % durations.length) * framesPerDuration;
+        }
         
         // For animations where the number of XML frames matches the sprite sheet frames
         if (durations.length === animData.frames) {

@@ -86,6 +86,20 @@
 
 ## **🔧 Recently Resolved Issues**
 
+- ✅ Added testing functionality for previously hard-to-test features:
+  - Implemented `debugForceSad()` for testing the sad animation with proper sound effects
+    - Extended test duration from 10 to 30 seconds for better observation
+  - Enhanced night mode testing options:
+    - Implemented `debugForceNight()` for temporary night background testing
+    - Added `debugToggleNightMode()` for persistent night/day toggling
+  - Improved debug panel UI:
+    - Relocated to right side of screen for less intrusion
+    - Stacked buttons vertically for better organization
+    - Clarified button labels to indicate temporary vs. persistent effects
+- ✅ Fixed animation system issues:
+  - Added special frame mapping for sad animation to properly display all 16 frames in the sprite sheet
+  - Ensured consistent animation behavior with other special animations (hop, clean)
+
 - ✅ Fixed button positioning and visibility issues:
   - Placed action buttons at optimal coordinates (top: 750px, left: 9px)
   - Positioned sound toggle in top right corner (top: 13px, left: 1065px)
